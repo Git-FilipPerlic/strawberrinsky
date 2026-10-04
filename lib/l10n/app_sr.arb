@@ -1,0 +1,18 @@
+{
+  "@@locale": "sr",
+
+  "appTitle": "Strawberrinsky",
+  "@appTitle": {
+    "description": "Naziv aplikacije"
+  },
+
+  "homeGreeting": "Pomoći ću ti da pronađeš svoje stvari.",
+  "@homeGreeting": {
+    "description": "Pozdravna rečenica na početnom ekranu"
+  },
+
+  "languageName": "Srpski",
+  "@languageName": {
+    "description": "Naziv jezika koji je trenutno uključen"
+  }
+}

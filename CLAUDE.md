@@ -13,8 +13,7 @@ Jedan kod za Android i iOS. Šifra projekta u razgovorima: **strawberrynski**.
 
 ## Status (4. oktobar 2026)
 
-Prazan Flutter starter. Arhitektura i spisak feature-a su **nacrt** — čekaju
-potvrdu korisnika pre prvog koda.
+Arhitektura i spisak feature-a **potvrđeni**. Urađen BASE-001.
 
 ---
 
@@ -108,13 +107,13 @@ testiraju bez ijednog plaćenog poziva.
 State management: `setState` + servisi (isto kao u e-vent), dok se ne pokaže
 potreba za više.
 
-## Spisak feature-a (nacrt — čeka potvrdu)
+## Spisak feature-a (potvrđen 4. oktobra 2026)
 
 Radi se odozgo nadole.
 
 | ID | Šta | Status |
 |---|---|---|
-| BASE-001 | Tema, krupan tekst, dva jezika (sr / en) | — |
+| BASE-001 | Tema, krupan tekst, dva jezika (sr / en) | ✅ |
 | BASE-002 | Skelet: izbor režima (jednostavan / pun) | — |
 | BASE-003 | Modeli i mock servisi (soba, viđena stvar, lažni AI) | — |
 | ROOM-001 | Spisak soba: dodaj, preimenuj, obriši | — |
