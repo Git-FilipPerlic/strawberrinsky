@@ -35,3 +35,20 @@
   ponovo pita, ne pada.
 - `flutter analyze` — bez grešaka; 9 testova prolazi.
 - Sledeće: BASE-003, modeli i mock servisi.
+
+## BASE-003 — modeli i lažni AI (4. oktobar 2026)
+
+- Bez novih paketa.
+- Modeli (`lib/models/`):
+  - `Room` — soba (id, naziv).
+  - `DetectedItem` — šta je AI video: naziv i opis mesta, na srpskom i
+    engleskom (da odgovor može da se izgovori na jeziku telefona).
+  - `Sighting` — jedno viđenje: stvar, soba, vreme, slika (može da fali).
+  - Svi znaju da se pretvore u podatak za čuvanje i nazad; oštećen ili
+    nepotpun podatak daje `null` / prazno, nikad pad.
+- `VisionService` — interfejs „slika → spisak stvari".
+  `MockVisionService` — lažni AI: ne gleda sliku, vraća 4 spremljena
+  odgovora ukrug (jedan je prazan, da se vidi i to stanje).
+- Još se nigde ne prikazuje na ekranu — koristi se od SCAN-002.
+- `flutter analyze` — bez grešaka; 16 testova prolazi.
+- Sledeće: ROOM-001, spisak soba.

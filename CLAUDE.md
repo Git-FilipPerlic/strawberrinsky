@@ -13,7 +13,7 @@ Jedan kod za Android i iOS. Šifra projekta u razgovorima: **strawberrynski**.
 
 ## Status (4. oktobar 2026)
 
-Arhitektura i spisak feature-a **potvrđeni**. Urađeni BASE-001 i BASE-002.
+Arhitektura i spisak feature-a **potvrđeni**. Urađeni BASE-001, BASE-002 i BASE-003.
 
 ---
 
@@ -83,6 +83,7 @@ lib/
   l10n/                     - prevodi: srpski (latinica) i engleski
   models/
     room.dart               - Room (id, naziv)
+    detected_item.dart      - DetectedItem: šta je AI video (naziv + mesto, sr/en)
     sighting.dart           - Sighting: stvar, soba, opis mesta, slika, vreme
   services/
     image_source.dart       - interfejs: odakle dolazi slika
@@ -115,7 +116,7 @@ Radi se odozgo nadole.
 |---|---|---|
 | BASE-001 | Tema, krupan tekst, dva jezika (sr / en) | ✅ |
 | BASE-002 | Skelet: izbor režima (jednostavan / pun) | ✅ |
-| BASE-003 | Modeli i mock servisi (soba, viđena stvar, lažni AI) | — |
+| BASE-003 | Modeli i mock servisi (soba, viđena stvar, lažni AI) | ✅ |
 | ROOM-001 | Spisak soba: dodaj, preimenuj, obriši | — |
 | SCAN-001 | Kamera telefona: pregled i slikanje na par sekundi | — |
 | SCAN-002 | Slanje slike AI-u (prvo mock) i prikaz šta je prepoznato | — |
