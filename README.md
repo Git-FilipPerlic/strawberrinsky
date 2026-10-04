@@ -7,7 +7,7 @@ samo izgovoriš naziv stvari koju tražiš, a strawberrinsky pronađe gde je.
 
 ## Status
 
-Projekat je tek započet — za sada nema koda.
+Projekat je tek započet — za sada stoji samo prazan Flutter starter (Android i iOS).
 
 ## Rad na više računara
 
