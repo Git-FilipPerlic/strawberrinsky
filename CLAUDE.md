@@ -13,7 +13,7 @@ Jedan kod za Android i iOS. Šifra projekta u razgovorima: **strawberrynski**.
 
 ## Status (4. oktobar 2026)
 
-Arhitektura i spisak feature-a **potvrđeni**. Urađen BASE-001.
+Arhitektura i spisak feature-a **potvrđeni**. Urađeni BASE-001 i BASE-002.
 
 ---
 
@@ -114,7 +114,7 @@ Radi se odozgo nadole.
 | ID | Šta | Status |
 |---|---|---|
 | BASE-001 | Tema, krupan tekst, dva jezika (sr / en) | ✅ |
-| BASE-002 | Skelet: izbor režima (jednostavan / pun) | — |
+| BASE-002 | Skelet: izbor režima (jednostavan / pun) | ✅ |
 | BASE-003 | Modeli i mock servisi (soba, viđena stvar, lažni AI) | — |
 | ROOM-001 | Spisak soba: dodaj, preimenuj, obriši | — |
 | SCAN-001 | Kamera telefona: pregled i slikanje na par sekundi | — |
@@ -136,8 +136,8 @@ Radi se odozgo nadole.
 | Kamera | `camera` |
 | Govor u tekst | `speech_to_text` |
 | Tekst u govor | `flutter_tts` |
-| Čuvanje na telefonu | `sqflite` (ili `shared_preferences` za sitnice) |
-| Prevodi | `flutter_localizations` + `intl` |
+| Čuvanje na telefonu | `sqflite` (ili `shared_preferences` za sitnice — ✅ instaliran) |
+| Prevodi | `flutter_localizations` + `intl` — ✅ instalirani |
 | Poziv posredniku | `http` (ili `cloud_functions`) |
 | Dozvole | `permission_handler` |
 

@@ -1,39 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:strawberrinsky/app.dart';
+import 'package:strawberrinsky/models/app_mode.dart';
+import 'package:strawberrinsky/services/settings_store.dart';
 import 'package:strawberrinsky/theme/app_theme.dart';
 
+Future<void> _startApp(
+  WidgetTester tester, {
+  Locale locale = const Locale('sr'),
+  Map<String, Object> saved = const {},
+}) async {
+  SharedPreferences.setMockInitialValues(saved);
+  tester.platformDispatcher.localesTestValue = [locale];
+  addTearDown(tester.platformDispatcher.clearLocalesTestValue);
+
+  await tester.pumpWidget(StrawberrinskyApp());
+  await tester.pumpAndSettle();
+}
+
 void main() {
-  testWidgets('Srpski telefon — tekst na srpskom (latinica)', (tester) async {
-    tester.platformDispatcher.localesTestValue = const [Locale('sr')];
-    addTearDown(tester.platformDispatcher.clearLocalesTestValue);
+  group('Jezik', () {
+    testWidgets('srpski telefon — srpski (latinica)', (tester) async {
+      await _startApp(tester);
+      expect(find.text('Ko koristi ovaj telefon?'), findsOneWidget);
+    });
 
-    await tester.pumpWidget(const StrawberrinskyApp());
-    await tester.pumpAndSettle();
+    testWidgets('engleski telefon — engleski', (tester) async {
+      await _startApp(tester, locale: const Locale('en', 'US'));
+      expect(find.text('Who uses this phone?'), findsOneWidget);
+    });
 
-    expect(find.text('Pomoći ću ti da pronađeš svoje stvari.'), findsOneWidget);
-    expect(find.text('Srpski'), findsOneWidget);
+    testWidgets('neki drugi jezik — pada na engleski', (tester) async {
+      await _startApp(tester, locale: const Locale('de'));
+      expect(find.text('Who uses this phone?'), findsOneWidget);
+    });
   });
 
-  testWidgets('Engleski telefon — tekst na engleskom', (tester) async {
-    tester.platformDispatcher.localesTestValue = const [Locale('en', 'US')];
-    addTearDown(tester.platformDispatcher.clearLocalesTestValue);
+  group('Režim', () {
+    testWidgets('izbor jednostavnog režima se pamti', (tester) async {
+      await _startApp(tester);
 
-    await tester.pumpWidget(const StrawberrinskyApp());
-    await tester.pumpAndSettle();
+      await tester.tap(find.text('Jednostavan režim'));
+      await tester.pumpAndSettle();
 
-    expect(find.text('I will help you find your things.'), findsOneWidget);
-  });
+      expect(find.text('Šta tražiš?'), findsOneWidget);
+      expect(await SettingsStore().loadMode(), AppMode.simple);
+    });
 
-  testWidgets('Neki drugi jezik — pada na engleski', (tester) async {
-    tester.platformDispatcher.localesTestValue = const [Locale('de')];
-    addTearDown(tester.platformDispatcher.clearLocalesTestValue);
+    testWidgets('sačuvan režim se otvara odmah', (tester) async {
+      await _startApp(tester, saved: {'app_mode': 'full'});
+      expect(find.text('Pređi na jednostavan režim'), findsOneWidget);
+    });
 
-    await tester.pumpWidget(const StrawberrinskyApp());
-    await tester.pumpAndSettle();
+    testWidgets('nečitljiv sačuvan režim — pita ponovo', (tester) async {
+      await _startApp(tester, saved: {'app_mode': 'nesto'});
+      expect(find.text('Ko koristi ovaj telefon?'), findsOneWidget);
+    });
 
-    expect(find.text('English'), findsOneWidget);
+    testWidgets('kratak dodir u uglu NE izlazi iz jednostavnog režima', (
+      tester,
+    ) async {
+      await _startApp(tester, saved: {'app_mode': 'simple'});
+
+      await tester.tap(find.byIcon(Icons.settings));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Šta tražiš?'), findsOneWidget);
+    });
+
+    testWidgets('držanje 3 sekunde izlazi u pun režim', (tester) async {
+      await _startApp(tester, saved: {'app_mode': 'simple'});
+
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byIcon(Icons.settings)),
+      );
+      await tester.pump(); // prvi kadar — tu krene odbrojavanje
+      await tester.pump(const Duration(seconds: 3));
+      await tester.pump(const Duration(milliseconds: 100));
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(find.text('Pređi na jednostavan režim'), findsOneWidget);
+      expect(await SettingsStore().loadMode(), AppMode.full);
+    });
   });
 
   test('Jednostavan režim ima krupniji tekst', () {

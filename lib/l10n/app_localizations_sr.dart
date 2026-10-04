@@ -13,8 +13,31 @@ class AppLocalizationsSr extends AppLocalizations {
   String get appTitle => 'Strawberrinsky';
 
   @override
-  String get homeGreeting => 'Pomoći ću ti da pronađeš svoje stvari.';
+  String get modeChoiceTitle => 'Ko koristi ovaj telefon?';
 
   @override
-  String get languageName => 'Srpski';
+  String get modeSimpleTitle => 'Jednostavan režim';
+
+  @override
+  String get modeSimpleDescription =>
+      'Za stariju osobu: krupan tekst i jedno veliko dugme.';
+
+  @override
+  String get modeFullTitle => 'Pun režim';
+
+  @override
+  String get modeFullDescription => 'Za ukućane: sobe, snimanje i istorija.';
+
+  @override
+  String get simpleHomeQuestion => 'Šta tražiš?';
+
+  @override
+  String get holdToExitSimpleMode =>
+      'Drži 3 sekunde za izlaz iz jednostavnog režima';
+
+  @override
+  String get fullHomeEmpty => 'Ovde će biti sobe, snimanje i istorija.';
+
+  @override
+  String get switchToSimpleMode => 'Pređi na jednostavan režim';
 }

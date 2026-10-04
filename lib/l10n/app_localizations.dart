@@ -104,17 +104,59 @@ abstract class AppLocalizations {
   /// **'Strawberrinsky'**
   String get appTitle;
 
-  /// Pozdravna rečenica na početnom ekranu
+  /// Naslov ekrana za izbor režima, pri prvom pokretanju
   ///
   /// In sr, this message translates to:
-  /// **'Pomoći ću ti da pronađeš svoje stvari.'**
-  String get homeGreeting;
+  /// **'Ko koristi ovaj telefon?'**
+  String get modeChoiceTitle;
 
-  /// Naziv jezika koji je trenutno uključen
+  /// No description provided for @modeSimpleTitle.
   ///
   /// In sr, this message translates to:
-  /// **'Srpski'**
-  String get languageName;
+  /// **'Jednostavan režim'**
+  String get modeSimpleTitle;
+
+  /// No description provided for @modeSimpleDescription.
+  ///
+  /// In sr, this message translates to:
+  /// **'Za stariju osobu: krupan tekst i jedno veliko dugme.'**
+  String get modeSimpleDescription;
+
+  /// No description provided for @modeFullTitle.
+  ///
+  /// In sr, this message translates to:
+  /// **'Pun režim'**
+  String get modeFullTitle;
+
+  /// No description provided for @modeFullDescription.
+  ///
+  /// In sr, this message translates to:
+  /// **'Za ukućane: sobe, snimanje i istorija.'**
+  String get modeFullDescription;
+
+  /// Glavno pitanje u jednostavnom režimu
+  ///
+  /// In sr, this message translates to:
+  /// **'Šta tražiš?'**
+  String get simpleHomeQuestion;
+
+  /// Opis malog dugmeta u uglu (čita ga čitač ekrana)
+  ///
+  /// In sr, this message translates to:
+  /// **'Drži 3 sekunde za izlaz iz jednostavnog režima'**
+  String get holdToExitSimpleMode;
+
+  /// No description provided for @fullHomeEmpty.
+  ///
+  /// In sr, this message translates to:
+  /// **'Ovde će biti sobe, snimanje i istorija.'**
+  String get fullHomeEmpty;
+
+  /// No description provided for @switchToSimpleMode.
+  ///
+  /// In sr, this message translates to:
+  /// **'Pređi na jednostavan režim'**
+  String get switchToSimpleMode;
 }
 
 class _AppLocalizationsDelegate

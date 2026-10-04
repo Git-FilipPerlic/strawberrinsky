@@ -2,6 +2,16 @@
   "@@locale": "en",
 
   "appTitle": "Strawberrinsky",
-  "homeGreeting": "I will help you find your things.",
-  "languageName": "English"
+
+  "modeChoiceTitle": "Who uses this phone?",
+  "modeSimpleTitle": "Simple mode",
+  "modeSimpleDescription": "For an older person: large text and one big button.",
+  "modeFullTitle": "Full mode",
+  "modeFullDescription": "For family members: rooms, scanning and history.",
+
+  "simpleHomeQuestion": "What are you looking for?",
+  "holdToExitSimpleMode": "Hold for 3 seconds to leave simple mode",
+
+  "fullHomeEmpty": "Rooms, scanning and history will be here.",
+  "switchToSimpleMode": "Switch to simple mode"
 }

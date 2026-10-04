@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'l10n/app_localizations.dart';
+import 'models/app_mode.dart';
+import 'screens/full/full_home_screen.dart';
+import 'screens/mode_choice_screen.dart';
+import 'screens/simple/simple_home_screen.dart';
+import 'services/settings_store.dart';
 import 'theme/app_theme.dart';
 
 /// Srpski, latinica. Naši prevodi su u `app_sr.arb`, a ugrađeni tekstovi
@@ -13,16 +18,49 @@ const Locale serbianLatin = Locale.fromSubtags(
 
 const Locale english = Locale('en');
 
-class StrawberrinskyApp extends StatelessWidget {
-  const StrawberrinskyApp({super.key});
+class StrawberrinskyApp extends StatefulWidget {
+  StrawberrinskyApp({super.key, SettingsStore? settings})
+    : settings = settings ?? SettingsStore();
+
+  final SettingsStore settings;
+
+  @override
+  State<StrawberrinskyApp> createState() => _StrawberrinskyAppState();
+}
+
+class _StrawberrinskyAppState extends State<StrawberrinskyApp> {
+  /// Dok se čita sačuvani režim — kratko, ne prikazuje se ništa.
+  bool _loading = true;
+
+  /// `null` znači da režim još nije izabran.
+  AppMode? _mode;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMode();
+  }
+
+  Future<void> _loadMode() async {
+    final mode = await widget.settings.loadMode();
+    if (!mounted) return;
+    setState(() {
+      _mode = mode;
+      _loading = false;
+    });
+  }
+
+  void _setMode(AppMode mode) {
+    setState(() => _mode = mode);
+    widget.settings.saveMode(mode);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: false,
-      // Izbor režima (jednostavan / pun) dolazi u BASE-002.
-      theme: AppTheme.full(),
+      theme: _mode == AppMode.simple ? AppTheme.simple() : AppTheme.full(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -31,46 +69,27 @@ class StrawberrinskyApp extends StatelessWidget {
       ],
       supportedLocales: const [serbianLatin, english],
       localeResolutionCallback: _resolveLocale,
-      home: const _PlaceholderHome(),
+      home: _buildHome(),
     );
+  }
+
+  Widget _buildHome() {
+    if (_loading) return const Scaffold();
+
+    return switch (_mode) {
+      null => ModeChoiceScreen(onModeChosen: _setMode),
+      AppMode.simple => SimpleHomeScreen(
+        onExit: () => _setMode(AppMode.full),
+      ),
+      AppMode.full => FullHomeScreen(
+        onSwitchToSimple: () => _setMode(AppMode.simple),
+      ),
+    };
   }
 
   /// Ako je telefon na srpskom — srpski, inače engleski.
   static Locale _resolveLocale(Locale? deviceLocale, Iterable<Locale> _) {
     if (deviceLocale?.languageCode == 'sr') return serbianLatin;
     return english;
-  }
-}
-
-/// Privremeni početni ekran — samo da se vide tema i prevod.
-/// Zamenjuje ga izbor režima u BASE-002.
-class _PlaceholderHome extends StatelessWidget {
-  const _PlaceholderHome();
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final textTheme = Theme.of(context).textTheme;
-
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.appTitle)),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.large),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                l10n.homeGreeting,
-                style: textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: AppSpacing.medium),
-              Text(l10n.languageName, style: textTheme.bodyLarge),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

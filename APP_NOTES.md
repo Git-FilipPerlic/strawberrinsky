@@ -21,3 +21,17 @@
 - Početni ekran je privremen — samo pokazuje pozdrav na izabranom jeziku.
 - `flutter analyze` — bez grešaka; 4 testa prolaze.
 - Sledeće: BASE-002, izbor režima.
+
+## BASE-002 — izbor režima (4. oktobar 2026)
+
+- Dodat paket (odobren): `shared_preferences` — pamti izabrani režim.
+- Prvo pokretanje: ekran „Ko koristi ovaj telefon?" sa dva izbora.
+  Izbor se pamti; sledeći put aplikacija odmah otvara taj režim.
+- Jednostavan režim: krupna tema, za sada samo „Šta tražiš?" (dugme
+  dolazi u SIMPLE-001). Izlaz: malo dugme u uglu koje se **drži 3 sekunde**
+  (krug se popunjava), kratak dodir ne radi ništa.
+- Pun režim: za sada prazan ekran + dugme „Pređi na jednostavan režim".
+- Ako je sačuvana vrednost nečitljiva ili čuvanje ne uspe — aplikacija
+  ponovo pita, ne pada.
+- `flutter analyze` — bez grešaka; 9 testova prolazi.
+- Sledeće: BASE-003, modeli i mock servisi.

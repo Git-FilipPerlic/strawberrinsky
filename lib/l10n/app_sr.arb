@@ -6,13 +6,26 @@
     "description": "Naziv aplikacije"
   },
 
-  "homeGreeting": "Pomoći ću ti da pronađeš svoje stvari.",
-  "@homeGreeting": {
-    "description": "Pozdravna rečenica na početnom ekranu"
+  "modeChoiceTitle": "Ko koristi ovaj telefon?",
+  "@modeChoiceTitle": {
+    "description": "Naslov ekrana za izbor režima, pri prvom pokretanju"
   },
 
-  "languageName": "Srpski",
-  "@languageName": {
-    "description": "Naziv jezika koji je trenutno uključen"
-  }
+  "modeSimpleTitle": "Jednostavan režim",
+  "modeSimpleDescription": "Za stariju osobu: krupan tekst i jedno veliko dugme.",
+  "modeFullTitle": "Pun režim",
+  "modeFullDescription": "Za ukućane: sobe, snimanje i istorija.",
+
+  "simpleHomeQuestion": "Šta tražiš?",
+  "@simpleHomeQuestion": {
+    "description": "Glavno pitanje u jednostavnom režimu"
+  },
+
+  "holdToExitSimpleMode": "Drži 3 sekunde za izlaz iz jednostavnog režima",
+  "@holdToExitSimpleMode": {
+    "description": "Opis malog dugmeta u uglu (čita ga čitač ekrana)"
+  },
+
+  "fullHomeEmpty": "Ovde će biti sobe, snimanje i istorija.",
+  "switchToSimpleMode": "Pređi na jednostavan režim"
 }
